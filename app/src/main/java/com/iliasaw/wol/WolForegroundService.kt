@@ -225,7 +225,8 @@ class WolForegroundService : Service() {
     private fun checkAndSend(network: Network) {
         val connMgr = cm ?: return
         val caps = connMgr.getNetworkCapabilities(network) ?: return
-        if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) return
+        // VPN-интерфейс наследует транспорты Wi-Fi — с ним пакет ушёл бы в туннель
+        if (!CurrentWifi.isRealWifi(caps)) return
         val lp = connMgr.getLinkProperties(network)
         val phoneSubnet = WolSender.phoneSubnet(lp)
         val ssid = CurrentWifi.ssid(this)
@@ -264,7 +265,7 @@ class WolForegroundService : Service() {
         val connMgr = cm ?: return
         for (network in connMgr.allNetworks) {
             val caps = connMgr.getNetworkCapabilities(network) ?: continue
-            if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) continue
+            if (!CurrentWifi.isRealWifi(caps)) continue
             checkAndSend(network)
             break
         }

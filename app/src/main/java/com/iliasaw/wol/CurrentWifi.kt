@@ -14,6 +14,11 @@ import android.Manifest
 /** Чтение SSID текущей Wi-Fi сети с учётом ограничений Android 9–13+. */
 object CurrentWifi {
 
+    /** Настоящая Wi-Fi сеть: VPN-интерфейс наследует её транспорты, поэтому его отсеиваем. */
+    fun isRealWifi(caps: NetworkCapabilities): Boolean =
+        caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) &&
+            !caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+
     enum class Reason { OK, PERMISSION, NOT_ON_WIFI, LOCATION_OFF, HIDDEN }
 
     data class Result(val reason: Reason, val ssid: String? = null)
@@ -35,7 +40,7 @@ object CurrentWifi {
         var sawWifi = false
         for (network in cm.allNetworks) {
             val caps = cm.getNetworkCapabilities(network) ?: continue
-            if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) continue
+            if (!isRealWifi(caps)) continue
             sawWifi = true
             clean((caps.transportInfo as? WifiInfo)?.ssid)?.let { return Result(Reason.OK, it) }
         }
@@ -59,7 +64,7 @@ object CurrentWifi {
         val cm = context.getSystemService(ConnectivityManager::class.java)
         for (network in cm.allNetworks) {
             val caps = cm.getNetworkCapabilities(network) ?: continue
-            if (!caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) continue
+            if (!isRealWifi(caps)) continue
             clean((caps.transportInfo as? WifiInfo)?.ssid)?.let { return it }
         }
         clean(wmSsid(context))?.let { return it }

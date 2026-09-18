@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.LinkProperties
 import android.net.Network
-import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -140,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         var wifi: Network? = null
         for (network in cm.allNetworks) {
             val caps = cm.getNetworkCapabilities(network) ?: continue
-            if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            if (CurrentWifi.isRealWifi(caps)) {
                 wifi = network
                 break
             }
@@ -164,7 +163,7 @@ class MainActivity : AppCompatActivity() {
         var lp: LinkProperties? = null
         for (network in cm.allNetworks) {
             val caps = cm.getNetworkCapabilities(network) ?: continue
-            if (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            if (CurrentWifi.isRealWifi(caps)) {
                 lp = cm.getLinkProperties(network)
                 break
             }
