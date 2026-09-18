@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WakeOnLan</string>
+    <string name="monitor_switch">Следить за сетью и включать ПК</string>
+    <string name="send_now">Отправить сейчас</string>
+    <string name="detect_subnet">Определить</string>
+    <string name="use_current">Текущая</string>
+    <string name="label_mac">MAC-адрес компьютера</string>
+    <string name="label_subnet">Подсеть домашней сети (IP, без последнего числа)</string>
+    <string name="label_ssid">SSID (имя Wi-Fi сети, необязательно)</string>
+    <string name="label_min_away">Минимальный отрыв от сети (минуты)</string>
+    <string name="label_port">Порт (обычно 9)</string>
+    <string name="status_stopped">Сервис остановлен</string>
+    <string name="status_running">Сервис работает</string>
+    <string name="status_network">Сеть: %1$s</string>
+    <string name="status_home_yes">Дома: да</string>
+    <string name="status_home_no">Дома: нет</string>
+    <string name="status_home_unknown">Дома: —</string>
+    <string name="status_last">Последняя отправка: %1$s — %2$s</string>
+    <string name="status_last_none">Последняя отправка: —</string>
+    <string name="status_sending">Отправляю…</string>
+    <string name="notif_watching">Следит за сетью: %1$s</string>
+    <string name="hint_long">Как это работает: когда телефон подключается к домашней Wi-Fi сети после отрыва дольше, чем «минимальный отрыв», приложение шлёт magic packet, и компьютер включается. Пока вы дома, короткие переподключения Wi-Fi комп не будят. На ПК включите Wake-on-LAN в BIOS, в свойствах сетевой карты разрешите вывод по magic packet и отключите быстрый запуск. Если комп уже включён — пакет безопасно игнорируется.</string>
+    <string name="error_bad_mac">Заполните корректный MAC-адрес</string>
+    <string name="error_no_home">Укажите подсеть или SSID домашней сети</string>
+    <string name="error_detect">Не удалось определить — подключитесь к Wi-Fi</string>
+    <string name="error_not_on_wifi">Телефон не подключён к Wi-Fi</string>
+    <string name="error_location_off">Включите «Геолокация» в шторке — Samsung без неё скрывает SSID</string>
+    <string name="error_hidden">Система скрывает SSID — впишите имя сети вручную или выдайте «Геоданные» в настройках приложения</string>
+</resources>
