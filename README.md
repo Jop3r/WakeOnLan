@@ -1,5 +1,7 @@
 # WakeOnLan (Android)
 
+**Скачать:** [Releases](https://github.com/Jop3r/WakeOnLan/releases) → `app-release.apk`.
+
 Приложение-утилита: когда телефон подключается к домашней Wi-Fi сети после
 отрыва дольше заданного времени («минимальный отрыв»), оно шлёт Wake-on-LAN
 magic packet, и компьютер включается. Пока вы дома, короткие переподключения
@@ -24,6 +26,15 @@ gradlew.bat assembleDebug
 ```
 
 Готовый APK: `app/build/outputs/apk/debug/app-debug.apk`.
+
+## Распространение
+
+Release-сборка подписывается ключом из `keystore.properties` + `release.keystore`
+— эти файлы **не публикуются** (в `.gitignore`). Храните их в надёжном месте:
+без них нельзя собрать обновление с той же подписью, и пользователям придётся
+переустанавливать приложение заново. Обновления публикуются через
+[GitHub Releases](https://github.com/Jop3r/WakeOnLan/releases): собрать
+`assembleRelease`, создать новый тег и приложить APK.
 
 ## Настройка на ПК (обязательно)
 
