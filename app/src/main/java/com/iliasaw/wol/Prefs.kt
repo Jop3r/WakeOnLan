@@ -31,6 +31,11 @@ class Prefs(context: Context) {
         get() = sp.getInt(KEY_PORT, DEFAULT_PORT)
         set(value) = sp.edit().putInt(KEY_PORT, value).apply()
 
+    /** Был ли включён тумблер мониторинга — переживает перезагрузку телефона. */
+    var monitoringEnabled: Boolean
+        get() = sp.getBoolean(KEY_MONITORING, false)
+        set(value) = sp.edit().putBoolean(KEY_MONITORING, value).apply()
+
     companion object {
         const val DEFAULT_PORT = 9
         const val DEFAULT_MIN_AWAY = 20
@@ -40,5 +45,6 @@ class Prefs(context: Context) {
         private const val KEY_MIN_AWAY = "min_away"
         private const val KEY_LAST_HOME = "last_home"
         private const val KEY_PORT = "port"
+        private const val KEY_MONITORING = "monitoring_enabled"
     }
 }

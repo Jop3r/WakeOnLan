@@ -121,11 +121,13 @@ class MainActivity : AppCompatActivity() {
             render(WolForegroundService.state)
             return
         }
+        prefs.monitoringEnabled = true
         WolForegroundService.start(this)
     }
 
     private fun stopMonitoring() {
         saveFields()
+        prefs.monitoringEnabled = false
         WolForegroundService.stop(this)
     }
 
